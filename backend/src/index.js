@@ -1,4 +1,9 @@
-import {app} from "./app.js"
+import { app } from "./app.js";
+import {settingDotEnvPort} from "./config/dotenv.js";
 
-app.listen(3000, console.log("Servidor en puerto 3000"));
+const {port} = settingDotEnvPort()
+
+
+
+app.listen(port, console.log(`Servidor en puerto ${port}`));
 
