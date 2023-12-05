@@ -8,6 +8,7 @@ export const settingDotEnvPort = ()=>{
 
 export const settingDotEnvDB = ()=>{
     return { db:{
+        localhost: process.env.BD_LOCALHOST,
         host: process.env.DB_MONGO_ATLAS,
     }};
 };
