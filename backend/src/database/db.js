@@ -5,7 +5,7 @@ const {db} = settingDotEnvDB()
 
 export const connectMongo = async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/proyecto-final");
+        await mongoose.connect("mongodb://localhost:27017/proyectoDb");
         console.log("Base de datos conectada");
     } catch (error) {
         console.log("Error al conectarse a la base de datos");
