@@ -1,5 +1,5 @@
 //endpoints del servidor
-import {Routes} from "express"
+import {Router} from "express"
 import {register, login} from "../controllers/auth.controller.js"
 
 export const routes = Router()
