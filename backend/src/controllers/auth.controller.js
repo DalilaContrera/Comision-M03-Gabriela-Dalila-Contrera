@@ -1,7 +1,8 @@
 //autenticacion del usuario
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { createAccessToken } from "../middlewares/jwt.validator.js";
+import { token } from "morgan";
 
 //registro usuario
 export const register = async(req, res)=>{
@@ -10,30 +11,24 @@ export const register = async(req, res)=>{
    try {
 //encriptar contraseña
 const passwordHash = await bcrypt.hash(password, 10)
-      
+   //se guarda registro de usuario   
       const newUser = new User({
         username,
         email,
         password: passwordHash,
        });
 
- const userSaved = await newUser.save();
- 
-//token
-jwt.sign(
-   { id:userSaved._id},
-   "proyectoBd",
-   { expiresIn: "10h"},
-   (err, token) => {
-      if (err) console.log(err);
-      res.cookie("token", token);
-      res.json({userSaved});
-   }
-   );
+       const userSaved = await newUser.save();
 
+       //Token
+ const token = await createAccessToken({ id: userSaved._id })
+ res.cookie("token", token)
+ res.json({message: "Usuario registrado con exito",
+  id: userSaved.id,
+  username: userSaved.username,
+  email: userSaved.email,
+})
 
-
-      res.status(200).json(userSaved)
    } catch (error) {
       res.status(500).json({message: "Error al registrar el Usuario" , error})
    }

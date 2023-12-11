@@ -12,3 +12,8 @@ export const settingDotEnvDB = ()=>{
         host: process.env.DB_MONGO_ATLAS,
     }};
 };
+
+export const settingDotEnvSecret = ()=>{
+    return {secret:process.env.SECRET_KEY};
+};
+ 
