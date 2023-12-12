@@ -1,13 +1,21 @@
 //endpoints del servidor
-import {Router} from "express"
-import {register, login} from "../controllers/auth.controller.js"
+import { Router } from "express"
+import { register, login, logout, profile } from "../controllers/auth.controller.js"
+import { authRequired } from "../middlewares/validateToken.js";
 
-export const routes = Router()
+
+const routes = Router()
 
 //rutas para registro de usuario
 routes.post("/register", register)
 
 //rutas para el login
-routes.post("/login", login)
+routes.post("/login", login);
 
-export default routes
+//rutas para el logout
+routes.post("/logout", logout);
+
+//rutas para el perfil
+routes.get("/profile", authRequired, profile);
+
+export default routes;

@@ -53,7 +53,7 @@ const token = await createAccessToken({ id: userSaved._id });
 };
 
 //login usuario
-export const login = async(req,res) => {
+export const login = async(req, res) => {
    const { email, password } = req.body;
 
    try {
@@ -77,5 +77,26 @@ export const login = async(req,res) => {
    } catch (error) {
       res.status(500).json({ message: "Error al Loguearse" , error});
    }
+}; 
+
+//logout de usuario
+export const logout = async(req, res) => {
+     res.cookie("token", "", {expires: new Date(0)})
+     return res.status(200).json({message: "Hasta Pronto!"})
 };
 
+export const profile = async(req, res) => {
+    try {
+      const userFound = await User.findById(req.user.id);
+      if(!userFound)
+       return res.status(400).json({message: "Usuario no Encontrado"});
+
+      res.json({
+          message: "Perfil",
+          username: userFound.username,
+          email: userFound.email,
+   });
+    } catch (error) {
+      res.status(500).json({ message: "Error en el perfil", error});
+    }
+};
