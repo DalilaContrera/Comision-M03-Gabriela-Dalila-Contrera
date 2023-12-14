@@ -7,7 +7,7 @@ import { createAccessToken } from "../middlewares/jwt.validator.js";
 
 //registro usuario
 export const register = async(req, res) => {
-const { username, email, password } = req.body;
+const { username, email, password, avatarURL } = req.body;
 
 try {
 //encriptar contraseña
@@ -17,6 +17,7 @@ const newUser = new User({
         username,
         email,
         password: passwordHash,
+        avatarURL,
        });
 //guardamos registro de usuario
 const userSaved = await newUser.save();
@@ -95,6 +96,7 @@ export const profile = async(req, res) => {
           message: "Perfil",
           username: userFound.username,
           email: userFound.email,
+          avatarURL: userFound.avatarURL,
    });
     } catch (error) {
       res.status(500).json({ message: "Error en el perfil", error});

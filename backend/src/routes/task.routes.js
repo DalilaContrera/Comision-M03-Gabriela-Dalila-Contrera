@@ -13,7 +13,7 @@ const routes = Router();
 routes.get("/task", authRequired, getAllTask);
 routes.get("/task/:id",authRequired, getTaskByID);
 routes.post("/task",authRequired, createTask);
-routes.put("/task/;id",authRequired, updateTask);
+routes.put("/task/:id",authRequired, updateTask);
 routes.delete("/task/:id",authRequired, deleteTask);
 
 

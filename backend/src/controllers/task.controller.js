@@ -33,13 +33,16 @@ export const getTaskByID = async  (req, res) => {
 };
 
 export const createTask = async(req, res) => {
-    const { title, description, completed } = req.body
+    const { title, description, comments, user, imageURL, createdAt } = req.body
 
     try {
        const newTask = new Task({
             title,
             description,
-            completed,
+            comments,
+            user,
+            imageURL,
+            createdAt,
             user: req.user.id
         });
         const taskSaved = await newTask.save();

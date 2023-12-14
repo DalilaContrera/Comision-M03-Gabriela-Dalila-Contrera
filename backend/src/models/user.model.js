@@ -15,7 +15,11 @@ const userSchema =new Schema(
     password:{
         type: String,
         required: true,
-    }
+    },
+    avatarURL:{
+        type: String,
+        required: false,
+    },
 },{
     timestamps: true,
     versionKey: false,
