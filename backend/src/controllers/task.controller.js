@@ -55,16 +55,12 @@ export const updateTask = async(req, res) => {
          new: true,
         }).populate("user");
   
-    if(!updateTask)
-     return  res.status(404).json({message: "Tarea no encontrada"}); 
+    if(!updatedTask)
+     return res.status(404).json({ message: "Tarea no encontrada"}); 
     
-    res.status(200).json(updateTask);  
-
-
-
+    res.status(200).json(updatedTask);  
   } catch (error) {
     res.status(400).json({message: "Error al actualizar la tarea"});  
-
   }  
 };
 
