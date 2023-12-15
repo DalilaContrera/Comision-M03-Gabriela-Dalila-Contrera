@@ -3,7 +3,7 @@ import { body, validationResult } from "express-validator";
 //Validamos el Register
 export const validateRegister = [
     body("username")
-    .length({min: 6})
+    .isLength({min: 6})
     .withMessage("El Username debe tener al menos 6 caracteres"),
 
     body("email")
@@ -39,4 +39,5 @@ export const handleErrorValidations = ( req, res, next) => {
     }
     next()
 }
+
 
