@@ -1,9 +1,36 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { registerReq } from "../api/auth";
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
-   const[user, setUser]=useState(null); 
+export const useAuth = () => {
+    useContext = (AuthContext);
+    if(!context) throw new Error("Error en el contexto del usuario");
+    return context;
+};
 
-    return <AuthContext.Provider value={()}>{children}</AuthContext.Provider>;
+export const AuthProvider = ({children}) => {
+   const[user, setUser]= useState(null);
+   
+   //registro del usuario
+   const signup = async (user) => {
+    try {
+      const res = await registerReq(user);
+      console.log(res.data);
+      setUser(res.data);
+    } catch (error) {
+        console.log(error.response.data);
+    }
+   };
+
+    return (
+    <AuthContext.Provider 
+      value={{
+        signup,
+        user,
+    }}
+    >
+    {children}
+    </AuthContext.Provider>
+    );
 };

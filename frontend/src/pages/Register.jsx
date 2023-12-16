@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContext"
 
 export const Register = () => {
 
   const {register, handleSubmit, } = useForm();
 
+  //const { signup } = useAuth();
+
   const onSubmit = handleSubmit(async(values)=>{
-
-
+//conexion al servidor y envio usuario
+    console.log(values);
   });
 
     return (
