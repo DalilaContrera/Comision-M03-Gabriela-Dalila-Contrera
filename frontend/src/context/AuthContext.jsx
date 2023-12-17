@@ -4,7 +4,7 @@ import { registerReq } from "../api/auth";
 export const AuthContext = createContext();
 
 export const useAuth = () => {
-    useContext = (AuthContext);
+  const context = useContext (AuthContext);
     if(!context) throw new Error("Error en el contexto del usuario");
     return context;
 };
@@ -16,8 +16,8 @@ export const AuthProvider = ({children}) => {
    const signup = async (user) => {
     try {
       const res = await registerReq(user);
-      console.log(res.data);
-      setUser(res.data);
+      console.log(res);
+      setUser(res);
     } catch (error) {
         console.log(error.response.data);
     }
@@ -30,7 +30,7 @@ export const AuthProvider = ({children}) => {
         user,
     }}
     >
-    {children}
+     {children}
     </AuthContext.Provider>
     );
 };
